@@ -346,7 +346,7 @@ module Dalli
     end
 
     def key_with_namespace(key)
-      (ns = namespace) ? "#{ns}:#{key}" : key
+      (ns = namespace).present? ? "#{ns}:#{key}" : key
     end
 
     def key_without_namespace(key)

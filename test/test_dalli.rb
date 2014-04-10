@@ -532,6 +532,13 @@ describe 'Dalli' do
       end
     end
 
+    it "handle blank namespace" do
+      memcached do |dc|
+        dc = Dalli::Client.new('localhost:19122', :namespace => '')
+        assert_equal 'key', dc.send(:validate_key, 'key')
+      end
+    end
+
     it 'truncate cache keys that are too long' do
       memcached do
         dc = Dalli::Client.new('localhost:19122', :namespace => 'some:namspace')
